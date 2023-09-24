@@ -19,3 +19,7 @@ function extractNumbers(input) {
   }
   return result ? +result : NaN;
 }
+
+checkStringLength('something', 5);
+isPalindrome('dotaatod');
+extractNumbers('12 abd 0.5');
