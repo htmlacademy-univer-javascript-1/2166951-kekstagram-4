@@ -1,5 +1,8 @@
 //#region Constants
 const POSTS_COUNT = 25;
+const LIKES_COUNT = { MIN: 15, MAX: 200 };
+const AVATAR_COUNT = 6;
+const COMMENTS_COUNT = 30;
 
 const POST_DESCRIPTIONS = [
   'Закат на пляже',
@@ -65,31 +68,32 @@ const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
   const result = Math.random() * (upper - lower + 1) + lower;
+
   return Math.floor(result);
 };
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const generatePostId = createIdGenerator();
-const generatePhotoId = createIdGenerator();
 const generateCommentId = createIdGenerator();
 
 const createComment = () => ({
   id: generateCommentId(),
-  avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+  avatar: `img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg`,
   message: getRandomArrayElement(COMMENT_MESSAGES),
   name: getRandomArrayElement(NAMES),
 });
 
-const createPost = () => ({
-  id: generatePostId(),
-  url: `photos/${generatePhotoId()}.jpg`,
+const createPost = (id) => ({
+  id,
+  url: `photos/${id}.jpg`,
   description: getRandomArrayElement(POST_DESCRIPTIONS),
-  likes: getRandomInteger(15, 200),
-  comments: Array.from({length: getRandomInteger(0, 30)}, createComment),
+  likes: getRandomInteger(LIKES_COUNT.MIN, LIKES_COUNT.MAX),
+  comments: Array.from({length: getRandomInteger(0, COMMENTS_COUNT)}, createComment),
 });
 
-const posts = Array.from({length: POSTS_COUNT }, createPost);
+const getPosts = () => Array.from(
+  { length: POSTS_COUNT },
+  (_, postIndex) => createPost(postIndex + 1),
+);
 
-posts(); // Чтобы не было ошибок ESLint
-// console.log(posts);
+getPosts();
