@@ -1,12 +1,12 @@
-const checkStringLength = (input, maxLength) => input.length <= maxLength;
+export const checkStringLength = (input, maxLength) => input.length <= maxLength;
 
-const isPalindrome = (input) => {
+export const isPalindrome = (input) => {
   const string = input.toLowerCase().replaceAll(' ', '');
   const reverseString = string.split('').reverse().join('');
   return string === reverseString;
 };
 
-const extractNumbers = (input) => {
+export const extractNumbers = (input) => {
   const string = input.toString();
   let result = '';
   for (let i = 0; i < string.length; i++) {
@@ -17,7 +17,3 @@ const extractNumbers = (input) => {
   }
   return result ? +result : NaN;
 };
-
-checkStringLength('something', 5);
-isPalindrome('dotaatod');
-extractNumbers('12 abd 0.5');
