@@ -6,14 +6,14 @@ import {
 
 import {
   AVATAR_COUNT,
-  POST_DESCRIPTIONS,
+  PICTURE_DESCRIPTIONS,
   LIKES_COUNT,
   NAMES,
   COMMENT_MESSAGES,
   COMMENTS_COUNT,
 } from './constants.js';
 
-export const generateCommentId = createIdGenerator();
+const generateCommentId = createIdGenerator();
 
 export const createComment = () => ({
   id: generateCommentId(),
@@ -22,10 +22,10 @@ export const createComment = () => ({
   name: getRandomArrayElement(NAMES),
 });
 
-export const createPost = (id) => ({
+export const createPicture = (id) => ({
   id,
   url: `photos/${id}.jpg`,
-  description: getRandomArrayElement(POST_DESCRIPTIONS),
+  description: getRandomArrayElement(PICTURE_DESCRIPTIONS),
   likes: getRandomInteger(LIKES_COUNT.MIN, LIKES_COUNT.MAX),
   comments: Array.from(
     { length: getRandomInteger(0, COMMENTS_COUNT) },
