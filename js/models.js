@@ -13,7 +13,7 @@ import {
   COMMENTS_COUNT,
 } from './constants.js';
 
-export const generateCommentId = createIdGenerator();
+const generateCommentId = createIdGenerator();
 
 export const createComment = () => ({
   id: generateCommentId(),
