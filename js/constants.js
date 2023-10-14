@@ -1,9 +1,9 @@
-export const POSTS_COUNT = 25;
+export const PICTURES_COUNT = 25;
 export const LIKES_COUNT = { MIN: 15, MAX: 200 };
 export const AVATAR_COUNT = 6;
 export const COMMENTS_COUNT = 30;
 
-export const POST_DESCRIPTIONS = [
+export const PICTURE_DESCRIPTIONS = [
   'Закат на пляже',
   'Городская панорама ночью',
   'Зимний лес',

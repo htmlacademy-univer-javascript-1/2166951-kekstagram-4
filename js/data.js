@@ -1,7 +1,7 @@
-import { POSTS_COUNT } from './constants.js';
-import { createPost } from './models.js';
+import { PICTURES_COUNT } from './constants.js';
+import { createPicture } from './models.js';
 
-export const getPosts = () => Array.from(
-  { length: POSTS_COUNT },
-  (_, postIndex) => createPost(postIndex + 1),
+export const getPictures = () => Array.from(
+  { length: PICTURES_COUNT },
+  (_, pictureIndex) => createPicture(pictureIndex + 1),
 );
