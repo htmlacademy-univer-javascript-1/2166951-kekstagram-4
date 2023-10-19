@@ -11,6 +11,7 @@ import {
   NAMES,
   COMMENT_MESSAGES,
   COMMENTS_COUNT,
+  PICTURES_COUNT
 } from './constants.js';
 
 const generateCommentId = createIdGenerator();
@@ -32,3 +33,8 @@ export const createPicture = (id) => ({
     createComment
   ),
 });
+
+export const getPictures = () => Array.from(
+  { length: PICTURES_COUNT },
+  (_, pictureIndex) => createPicture(pictureIndex + 1),
+);
