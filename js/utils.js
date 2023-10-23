@@ -36,3 +36,18 @@ export const extractNumbers = (input) => {
   }
   return result ? +result : NaN;
 };
+
+export const parseTimeToMinutes = (time) => {
+  const [hours, minutes] = time.split(':').map(Number);
+  return hours * 60 + minutes;
+};
+
+export const isMeetingWithinWork = (startWork, endWork, startMeeting, meetingDuration) => {
+  const startWorkMinutes = parseTimeToMinutes(startWork);
+  const endWorkMinutes = parseTimeToMinutes(endWork);
+
+  const startMeetingMinutes = parseTimeToMinutes(startMeeting);
+  const endMeetingMinutes = startMeetingMinutes + meetingDuration;
+
+  return startWorkMinutes <= startMeetingMinutes && endMeetingMinutes <= endWorkMinutes;
+};
