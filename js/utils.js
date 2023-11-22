@@ -51,3 +51,5 @@ export const isMeetingWithinWork = (startWork, endWork, startMeeting, meetingDur
 
   return startWorkMinutes <= startMeetingMinutes && endMeetingMinutes <= endWorkMinutes;
 };
+
+export const isEscapeKey = (evt) => evt.key === 'Escape';
