@@ -1,8 +1,9 @@
 import { isEscapeKey } from './utils.js';
 import { createCommentTemplate } from './templates.js';
+import { COMMENTS_STEP } from './constants.js';
 
 let allComments = null;
-let commentsToShow = 5;
+let commentsToShow = COMMENTS_STEP;
 
 const body = document.querySelector('body');
 const fullPicture = document.querySelector('.big-picture');
@@ -38,7 +39,7 @@ const renderComments = () => {
 
 const closeFullViewPopup = () => {
   allComments = null;
-  commentsToShow = 5;
+  commentsToShow = COMMENTS_STEP;
 
   fullPicture.classList.add('hidden');
   commentCount.classList.add('hidden');
@@ -49,7 +50,7 @@ const closeFullViewPopup = () => {
 };
 
 const onShowMoreComments = () => {
-  commentsToShow += 5;
+  commentsToShow += COMMENTS_STEP;
   renderComments();
 };
 
