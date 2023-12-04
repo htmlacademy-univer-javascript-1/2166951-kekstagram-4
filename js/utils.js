@@ -53,3 +53,5 @@ export const isMeetingWithinWork = (startWork, endWork, startMeeting, meetingDur
 };
 
 export const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export const isImageFile = (file) => file && file.type.startsWith('image/');

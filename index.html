@@ -58,6 +58,7 @@
               method="post"
               enctype="multipart/form-data"
               autocomplete="off"
+              action="https://29.javascript.pages.academy/kekstagram"
             >
               <!-- Изначальное состояние поля для загрузки изображения -->
               <fieldset class="img-upload__start">
@@ -247,6 +248,8 @@
                         class="text__description"
                         name="description"
                         placeholder="Ваш комментарий..."
+                        data-pristine-maxlength="140"
+                        data-pristine-maxlength-message="Длина комментария не более 140 символов"
                       ></textarea>
                     </div>
                   </fieldset>
@@ -455,6 +458,6 @@
 
     <!-- Подключение скриптов -->
     <script src="js/main.js" type="module"></script>
-    <script src="js/thumbnails.js" type="module"></script>
+    <script src="vendor/pristine/pristine.min.js"></script>
   </body>
 </html>

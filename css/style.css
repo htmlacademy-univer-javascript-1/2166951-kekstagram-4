@@ -663,7 +663,6 @@ main {
 .text {
   margin: 0;
   padding: 0;
-  margin-bottom: 30px;
 
   text-align: center;
   border: none;
@@ -673,7 +672,6 @@ main {
   width: 450px;
 
   margin: 0 auto;
-  margin-bottom: 20px;
   padding: 5px 10px;
 
   font-family: "Open Sans", "Arial", sans-serif;
@@ -1157,6 +1155,14 @@ main {
 
 /* Экраны с сообщениями для пользователя
    ========================================================================== */
+.img-upload__field-wrapper {
+  margin-bottom: 20px;
+}
+
+.img-upload__field-wrapper-error-text {
+  margin-top: 10px;
+  color: red;
+}
 
 .img-upload__message {
   position: absolute;

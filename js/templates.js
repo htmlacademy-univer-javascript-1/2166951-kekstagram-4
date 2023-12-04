@@ -13,8 +13,8 @@ export const createPictureTemplate = ({ id, url, description, likes, comments })
   <a href="#" data-id="${id}" class="picture">
     <img class="picture__img" src="${url}" width="182" height="182" alt="${description}">
     <p class="picture__info">
-      <span class="picture__comments">${likes}</span>
-      <span class="picture__likes">${comments.length}</span>
+      <span class="picture__comments">${comments.length}</span>
+      <span class="picture__likes">${likes}</span>
     </p>
   </a>
 `;
