@@ -1,8 +1,10 @@
+
 import { isEscapeKey, isImageFile } from './utils.js';
 import { MAX_COUNT_HASHTAGS, HASHTAG_ERRORS, HASHTAG_REGEX } from './constants.js';
 
 const bodyElement = document.querySelector('body');
 const formElement = bodyElement.querySelector('.img-upload__form');
+const formButton = bodyElement.querySelector('.img-upload__submit');
 const fileInput = formElement.querySelector('.img-upload__input');
 const overlayElement = formElement.querySelector('.img-upload__overlay');
 const exitButton = overlayElement.querySelector('.img-upload__cancel');
@@ -50,10 +52,10 @@ const initValidation = () => {
   );
 };
 
-
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  formValidator.validate();
+const onSubmitBtnClick = () => {
+  if (formValidator.validate()) {
+    formElement.submit();
+  }
 };
 
 const onCloseBtnClick = () => {
@@ -87,7 +89,7 @@ function closeCreatePopup() {
   overlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
 
-  formElement.removeEventListener('submit', onFormSubmit);
+  formButton.removeEventListener('click', onSubmitBtnClick);
   exitButton.removeEventListener('click', onCloseBtnClick);
   document.removeEventListener('keydown', onDocumentEscKeydown);
   commentInput.removeEventListener('keydown', onInputEscKeydown);
@@ -100,7 +102,7 @@ function openCreatePopup () {
 
   initValidation();
 
-  formElement.addEventListener('submit', onFormSubmit);
+  formButton.addEventListener('click', onSubmitBtnClick);
   exitButton.addEventListener('click', onCloseBtnClick);
   document.addEventListener('keydown', onDocumentEscKeydown);
   commentInput.addEventListener('keydown', onInputEscKeydown);
