@@ -89,7 +89,7 @@ function closeCreatePopup() {
   overlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
 
-  formButton.removeEventListener('submit', onSubmitBtnClick);
+  formButton.removeEventListener('click', onSubmitBtnClick);
   exitButton.removeEventListener('click', onCloseBtnClick);
   document.removeEventListener('keydown', onDocumentEscKeydown);
   commentInput.removeEventListener('keydown', onInputEscKeydown);
