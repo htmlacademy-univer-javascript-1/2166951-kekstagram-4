@@ -1,6 +1,5 @@
-
 import { isEscapeKey, isImageFile } from './utils.js';
-import { MAX_COUNT_HASHTAGS, HASHTAG_ERRORS, HASHTAG_REGEX } from './constants.js';
+import { MAX_COUNT_HASHTAG, HashtagError, HASHTAG_REGEX } from './constants.js';
 
 const bodyElement = document.querySelector('body');
 const formElement = bodyElement.querySelector('.img-upload__form');
@@ -19,7 +18,7 @@ const isValidHashtag = (value) => value
   ? splitHashtagInput(value).every((hashtag) => HASHTAG_REGEX.test(hashtag))
   : true;
 
-const isCountValidHashtag = (value) => splitHashtagInput(value).length <= MAX_COUNT_HASHTAGS;
+const isCountValidHashtag = (value) => splitHashtagInput(value).length <= MAX_COUNT_HASHTAG;
 
 const isUniqueValidHashtag = (value) => {
   const hashtags = splitHashtagInput(value).map((hastag) => hastag.toLowerCase());
@@ -36,23 +35,24 @@ const initValidation = () => {
   formValidator.addValidator(
     hashtagsInput,
     isValidHashtag,
-    HASHTAG_ERRORS.IS_NOT_VALID,
+    HashtagError.IS_NOT_VALID,
   );
 
   formValidator.addValidator(
     hashtagsInput,
     isUniqueValidHashtag,
-    HASHTAG_ERRORS.IS_NOT_UNIQUE,
+    HashtagError.IS_NOT_UNIQUE,
   );
 
   formValidator.addValidator(
     hashtagsInput,
     isCountValidHashtag,
-    HASHTAG_ERRORS.IS_NOT_VALID_COUNT,
+    HashtagError.IS_NOT_VALID_COUNT,
   );
 };
 
-const onSubmitBtnClick = () => {
+const onSubmitBtnClick = (evt) => {
+  evt.preventDefault();
   if (formValidator.validate()) {
     formElement.submit();
   }
@@ -89,7 +89,7 @@ function closeCreatePopup() {
   overlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
 
-  formButton.removeEventListener('click', onSubmitBtnClick);
+  formButton.removeEventListener('submit', onSubmitBtnClick);
   exitButton.removeEventListener('click', onCloseBtnClick);
   document.removeEventListener('keydown', onDocumentEscKeydown);
   commentInput.removeEventListener('keydown', onInputEscKeydown);
