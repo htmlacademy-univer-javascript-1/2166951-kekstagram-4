@@ -4,7 +4,7 @@ export const AVATAR_COUNT = 6;
 export const COMMENTS_COUNT = 30;
 export const COMMENTS_STEP = 5;
 
-export const MAX_COMMENT_SYMBOLS = 140;
+export const MAX_COMMENT_SYMBOL = 140;
 export const MAX_COUNT_HASHTAG = 5;
 export const HASHTAG_REGEX = /^#[a-zа-яё0-9]{1,19}$/i;
 export const HashtagError = {
@@ -29,7 +29,7 @@ export const Effect = {
   HEAT: 'heat',
 };
 
-export const EffectSettings = {
+export const EffectSetting = {
   [Effect.DEFAULT]: {
     FILTER: '',
     MIN: 0,

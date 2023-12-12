@@ -1,4 +1,4 @@
-import { Effect, EffectSettings } from './constants.js';
+import { Effect, EffectSetting } from './constants.js';
 
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const imageElement = uploadOverlay.querySelector('.img-upload__preview img');
@@ -14,7 +14,7 @@ const clearFilter = () => {
 };
 
 const setFilter = () => {
-  const { FILTER, UNIT } = EffectSettings[selectedEffect];
+  const { FILTER, UNIT } = EffectSetting[selectedEffect];
   imageElement.style.filter = `${FILTER}(${effectLevelValue.value}${UNIT})`;
 };
 
@@ -44,11 +44,11 @@ const createSlider = () => {
   hideSlider();
 
   noUiSlider.create(sliderElement, {
-    start: EffectSettings[selectedEffect].MAX,
-    step: EffectSettings[selectedEffect].STEP,
+    start: EffectSetting[selectedEffect].MAX,
+    step: EffectSetting[selectedEffect].STEP,
     range: {
-      min: EffectSettings[selectedEffect].MIN,
-      max: EffectSettings[selectedEffect].MAX,
+      min: EffectSetting[selectedEffect].MIN,
+      max: EffectSetting[selectedEffect].MAX,
     },
     connect: 'lower',
     format: {
@@ -65,11 +65,11 @@ const updateSlider = () => {
     hideSlider();
   } else {
     sliderElement.noUiSlider.updateOptions({
-      start: EffectSettings[selectedEffect].MAX,
-      step: EffectSettings[selectedEffect].STEP,
+      start: EffectSetting[selectedEffect].MAX,
+      step: EffectSetting[selectedEffect].STEP,
       range: {
-        min: EffectSettings[selectedEffect].MIN,
-        max: EffectSettings[selectedEffect].MAX,
+        min: EffectSetting[selectedEffect].MIN,
+        max: EffectSetting[selectedEffect].MAX,
       },
     });
 

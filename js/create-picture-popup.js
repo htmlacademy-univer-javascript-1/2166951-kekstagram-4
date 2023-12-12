@@ -2,7 +2,7 @@ import { initScale, destroyScale } from './scale.js';
 import { initEffectsSlider, destroyEffectsSlider } from './effects-slider.js';
 
 import { isEscapeKey, isImageFile } from './utils.js';
-import { MAX_COUNT_HASHTAG, MAX_COMMENT_SYMBOLS, HashtagError, HASHTAG_REGEX } from './constants.js';
+import { MAX_COUNT_HASHTAG, MAX_COMMENT_SYMBOL, HashtagError, HASHTAG_REGEX } from './constants.js';
 
 const bodyElement = document.querySelector('body');
 const formElement = bodyElement.querySelector('.img-upload__form');
@@ -28,7 +28,7 @@ const isUniqueValidHashtag = (value) => {
   return hashtags.length === new Set(hashtags).size;
 };
 
-const isCountValidComment = (value) => value.length <= MAX_COMMENT_SYMBOLS;
+const isCountValidComment = (value) => value.length <= MAX_COMMENT_SYMBOL;
 
 const initValidation = () => {
   formValidator = new Pristine(formElement, {
@@ -58,7 +58,7 @@ const initValidation = () => {
   formValidator.addValidator(
     commentInput,
     isCountValidComment,
-    `Длина комментария не более ${MAX_COMMENT_SYMBOLS} символов`
+    `Длина комментария не более ${MAX_COMMENT_SYMBOL} символов`
   );
 };
 
