@@ -1,8 +1,9 @@
-import { initScale, destroyScale } from './scale.js';
+import { MAX_COUNT_HASHTAG, MAX_COMMENT_SYMBOL, HashtagError, HASHTAG_REGEX, SubmitButtonText } from './constants.js';
 import { initEffectsSlider, destroyEffectsSlider } from './effects-slider.js';
-
+import { initScale, destroyScale } from './scale.js';
 import { isEscapeKey, isImageFile } from './utils.js';
-import { MAX_COUNT_HASHTAG, MAX_COMMENT_SYMBOL, HashtagError, HASHTAG_REGEX } from './constants.js';
+import { showFailAlert, showSuccessAlert } from './alerts.js';
+import { sendData } from './api.js';
 
 const bodyElement = document.querySelector('body');
 const formElement = bodyElement.querySelector('.img-upload__form');
@@ -62,11 +63,15 @@ const initValidation = () => {
   );
 };
 
-const onSubmitBtnClick = (evt) => {
-  evt.preventDefault();
-  if (formValidator.validate()) {
-    formElement.submit();
-  }
+
+const blockSubmitButton = () => {
+  formButton.disabled = true;
+  formButton.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  formButton.disabled = false;
+  formButton.textContent = SubmitButtonText.DEFAULT;
 };
 
 const onCloseBtnClick = () => {
@@ -86,10 +91,27 @@ const onInputEscKeydown = (evt) => {
   }
 };
 
+const onFormSubmit = (evt) => {
+  evt.preventDefault();
+  if (formValidator.validate()) {
+    blockSubmitButton();
+    sendData(new FormData(evt.target))
+      .then(() => {
+        closeCreatePopup();
+        showSuccessAlert();
+      })
+      .catch(showFailAlert)
+      .finally(unblockSubmitButton);
+  }
+};
+
 const onFileInputChange = () => {
   const file = fileInput.files[0];
   if (isImageFile(file)) {
     openCreatePopup();
+  } else {
+    showFailAlert();
+    formElement.reset();
   }
 };
 
@@ -102,7 +124,7 @@ function closeCreatePopup() {
   overlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
 
-  formButton.removeEventListener('click', onSubmitBtnClick);
+  formElement.removeEventListener('submit', onFormSubmit);
   exitButton.removeEventListener('click', onCloseBtnClick);
   document.removeEventListener('keydown', onDocumentEscKeydown);
   commentInput.removeEventListener('keydown', onInputEscKeydown);
@@ -117,7 +139,7 @@ function openCreatePopup () {
   initScale();
   initEffectsSlider();
 
-  formButton.addEventListener('click', onSubmitBtnClick);
+  formElement.addEventListener('submit', onFormSubmit);
   exitButton.addEventListener('click', onCloseBtnClick);
   document.addEventListener('keydown', onDocumentEscKeydown);
   commentInput.addEventListener('keydown', onInputEscKeydown);
