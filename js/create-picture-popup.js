@@ -2,7 +2,7 @@ import { MAX_COUNT_HASHTAG, MAX_COMMENT_SYMBOL, HashtagError, HASHTAG_REGEX, Sub
 import { initEffectsSlider, destroyEffectsSlider } from './effects-slider.js';
 import { initScale, destroyScale } from './scale.js';
 import { isEscapeKey, isImageFile } from './utils.js';
-import { showFailAlert, showSuccessAlert } from './alerts.js';
+import { showErrorMessage, showSuccessMessage } from './messages.js';
 import { sendData } from './api.js';
 
 const bodyElement = document.querySelector('body');
@@ -63,15 +63,9 @@ const initValidation = () => {
   );
 };
 
-
-const blockSubmitButton = () => {
-  formButton.disabled = true;
-  formButton.textContent = SubmitButtonText.SENDING;
-};
-
-const unblockSubmitButton = () => {
-  formButton.disabled = false;
-  formButton.textContent = SubmitButtonText.DEFAULT;
+const toggleSubmitButton = (isDisabled = false) => {
+  formButton.disabled = isDisabled;
+  formButton.textContent = isDisabled ? SubmitButtonText.SENDING : SubmitButtonText.DEFAULT;
 };
 
 const onCloseBtnClick = () => {
@@ -94,14 +88,14 @@ const onInputEscKeydown = (evt) => {
 const onFormSubmit = (evt) => {
   evt.preventDefault();
   if (formValidator.validate()) {
-    blockSubmitButton();
+    toggleSubmitButton(true);
     sendData(new FormData(evt.target))
       .then(() => {
         closeCreatePopup();
-        showSuccessAlert();
+        showSuccessMessage();
       })
-      .catch(showFailAlert)
-      .finally(unblockSubmitButton);
+      .catch(showErrorMessage)
+      .finally(toggleSubmitButton);
   }
 };
 
@@ -110,7 +104,7 @@ const onFileInputChange = () => {
   if (isImageFile(file)) {
     openCreatePopup();
   } else {
-    showFailAlert();
+    showErrorMessage();
     formElement.reset();
   }
 };
