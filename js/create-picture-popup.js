@@ -15,6 +15,7 @@ const commentInput = overlayElement.querySelector('.text__description');
 const hashtagsInput = overlayElement.querySelector('.text__hashtags');
 
 let formValidator = null;
+let isCreatePopupLocked = false;
 
 const splitHashtagInput = (value) => value.trim().split(' ');
 
@@ -73,7 +74,7 @@ const onCloseBtnClick = () => {
 };
 
 const onDocumentEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && !isCreatePopupLocked) {
     evt.preventDefault();
     closeCreatePopup();
   }
@@ -139,6 +140,10 @@ function openCreatePopup () {
   commentInput.addEventListener('keydown', onInputEscKeydown);
   hashtagsInput.addEventListener('keydown', onInputEscKeydown);
 }
+
+export const setCreatePopupLock = (isLocked) => {
+  isCreatePopupLocked = isLocked;
+};
 
 export const initCreatePopup = () => {
   fileInput.addEventListener('change', onFileInputChange);

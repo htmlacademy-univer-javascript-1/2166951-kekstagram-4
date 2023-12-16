@@ -1,4 +1,5 @@
 export const PICTURES_COUNT = 25;
+export const RANDOM_PICTURES_COUNT = 10;
 export const LIKES_COUNT = { MIN: 15, MAX: 200 };
 export const AVATAR_COUNT = 6;
 export const COMMENTS_COUNT = 30;
@@ -12,6 +13,12 @@ export const HashtagError = {
   IS_NOT_VALID: 'Xештег не валиден',
   IS_NOT_UNIQUE: 'Xештеги не должны совпадать',
   IS_NOT_VALID_COUNT: `Xештегов должно быть не больше ${MAX_COUNT_HASHTAG}`,
+};
+
+export const Filter = {
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed'
 };
 
 export const SubmitButtonText = {

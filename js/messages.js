@@ -1,4 +1,5 @@
 import { isEscapeKey } from './utils.js';
+import { setCreatePopupLock } from './create-picture-popup.js';
 
 const SUCCESS_SELECTOR = '.success';
 const ERROR_SELECTOR = '.error';
@@ -19,6 +20,7 @@ const hideMessage = () => {
     currentAlert.querySelector(SUCCESS_BUTTON_SELECTOR) ||
     currentAlert.querySelector(ERROR_BUTTON_SELECTOR);
   currentAlert.remove();
+  setCreatePopupLock(false);
   exitButton.removeEventListener('click', hideMessage);
   document.removeEventListener('click', onOutsideClick);
   document.removeEventListener('keydown', onDocumentEscKeydown);
@@ -51,5 +53,6 @@ export const showSuccessMessage = () => {
 };
 
 export const showErrorMessage = () => {
+  setCreatePopupLock(true);
   showMessage(errorAlert, ERROR_BUTTON_SELECTOR);
 };
