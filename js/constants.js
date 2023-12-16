@@ -1,11 +1,6 @@
-export const PICTURES_COUNT = 25;
-export const RANDOM_PICTURES_COUNT = 10;
-export const LIKES_COUNT = { MIN: 15, MAX: 200 };
-export const AVATAR_COUNT = 6;
-export const COMMENTS_COUNT = 30;
-export const COMMENTS_STEP = 5;
 export const ALERT_SHOW_TIME = 5000;
-
+export const RANDOM_PICTURES_COUNT = 10;
+export const COMMENTS_STEP = 5;
 export const MAX_COMMENT_SYMBOL = 140;
 export const MAX_COUNT_HASHTAG = 5;
 export const HASHTAG_REGEX = /^#[a-zа-яё0-9]{1,19}$/i;

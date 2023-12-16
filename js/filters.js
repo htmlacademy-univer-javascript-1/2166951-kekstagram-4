@@ -14,13 +14,13 @@ const getDefaultPictures = () => pictures.slice();
 const getRandomPictures = () => pictures.slice().sort(sortRandomly).slice(0, RANDOM_PICTURES_COUNT);
 const getDiscussedPictures = () => pictures.slice().sort(sortByComments);
 
-const filterFunctions = {
+const filterMethod = {
   [Filter.DEFAULT]: getDefaultPictures,
   [Filter.RANDOM]: getRandomPictures,
   [Filter.DISCUSSED]: getDiscussedPictures,
 };
 
-const getFilteredPictures = () => filterFunctions[currentFilter]();
+const getFilteredPictures = () => filterMethod[currentFilter]();
 
 const setOnFilterClick = (callback) => {
   filters.addEventListener('click', (evt) => {
