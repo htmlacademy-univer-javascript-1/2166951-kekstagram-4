@@ -141,7 +141,7 @@ function openCreatePopup () {
   hashtagsInput.addEventListener('keydown', onInputEscKeydown);
 }
 
-export const setCreatePopupLock = (isLocked) => {
+export const onCreatePopupLocked = (isLocked) => {
   isCreatePopupLocked = isLocked;
 };
 
