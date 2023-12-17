@@ -73,7 +73,7 @@ const onCloseBtnClick = () => {
 };
 
 const onDocumentEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && !evt.target.querySelector('.error')) {
     evt.preventDefault();
     closeCreatePopup();
   }
