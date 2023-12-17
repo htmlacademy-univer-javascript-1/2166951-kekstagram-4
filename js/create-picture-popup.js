@@ -87,7 +87,7 @@ const onInputEscKeydown = (evt) => {
 
 const onFormSubmit = (evt) => {
   evt.preventDefault();
-  // if (formValidator.validate()) {
+  if (formValidator.validate()) {
     toggleSubmitButton(true);
     sendData(new FormData(evt.target))
       .then(() => {
@@ -96,7 +96,7 @@ const onFormSubmit = (evt) => {
       })
       .catch(showErrorMessage)
       .finally(toggleSubmitButton);
-  // }
+  }
 };
 
 const onFileInputChange = () => {
