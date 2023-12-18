@@ -18,7 +18,7 @@ const hashtagsInput = overlayElement.querySelector('.text__hashtags');
 
 let formValidator = null;
 
-const splitHashtagInput = (value) => value.trim().split(' ');
+const splitHashtagInput = (value) => value.trim().split(' ').filter(Boolean);
 
 const isValidHashtag = (value) => value
   ? splitHashtagInput(value).every((hashtag) => HASHTAG_REGEX.test(hashtag))

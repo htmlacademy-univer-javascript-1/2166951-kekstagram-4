@@ -22,7 +22,7 @@ const filterMethod = {
 
 const getFilteredPictures = () => filterMethod[currentFilter]();
 
-const setOnFilterClick = (callback) => {
+const setOnFilterClick = (cb) => {
   filtersContainer.addEventListener('click', (evt) => {
     if (!evt.target.classList.contains(FILTERS_BUTTON_CLASS)) {
       return;
@@ -37,13 +37,13 @@ const setOnFilterClick = (callback) => {
     clickedButton.classList.add(FILTER_ACTIVE_CLASS);
     currentFilter = clickedButton.id;
 
-    callback(getFilteredPictures());
+    cb(getFilteredPictures());
   });
 };
 
-export const initFilters = (data, callback) => {
+export const initFilters = (data, cb) => {
   pictures = data.slice();
   filtersContainer.classList.remove('img-filters--inactive');
-  setOnFilterClick(callback);
+  setOnFilterClick(cb);
 };
 
