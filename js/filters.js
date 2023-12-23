@@ -2,7 +2,7 @@ import { RANDOM_PICTURES_COUNT, Filter } from './constants.js';
 
 const FILTERS_BUTTON_CLASS = 'img-filters__button';
 const FILTER_ACTIVE_CLASS = `${FILTERS_BUTTON_CLASS}--active`;
-const filtersContainer = document.querySelector('.img-filters');
+const filtersContainerElement = document.querySelector('.img-filters');
 
 let currentFilter = Filter.DEFAULT;
 let pictures = [];
@@ -23,7 +23,7 @@ const filterMethod = {
 const getFilteredPictures = () => filterMethod[currentFilter]();
 
 const setOnFilterClick = (cb) => {
-  filtersContainer.addEventListener('click', (evt) => {
+  filtersContainerElement.addEventListener('click', (evt) => {
     if (!evt.target.classList.contains(FILTERS_BUTTON_CLASS)) {
       return;
     }
@@ -33,7 +33,7 @@ const setOnFilterClick = (cb) => {
       return;
     }
 
-    filtersContainer.querySelector(`.${FILTER_ACTIVE_CLASS}`).classList.remove(FILTER_ACTIVE_CLASS);
+    filtersContainerElement.querySelector(`.${FILTER_ACTIVE_CLASS}`).classList.remove(FILTER_ACTIVE_CLASS);
     clickedButton.classList.add(FILTER_ACTIVE_CLASS);
     currentFilter = clickedButton.id;
 
@@ -43,7 +43,7 @@ const setOnFilterClick = (cb) => {
 
 export const initFilters = (data, cb) => {
   pictures = data.slice();
-  filtersContainer.classList.remove('img-filters--inactive');
+  filtersContainerElement.classList.remove('img-filters--inactive');
   setOnFilterClick(cb);
 };
 

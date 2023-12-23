@@ -1,10 +1,10 @@
 import { Effect, EffectSetting } from './constants.js';
 
-const uploadOverlay = document.querySelector('.img-upload__overlay');
-const imageElement = uploadOverlay.querySelector('.img-upload__preview img');
-const effectsElement = uploadOverlay.querySelector('.effects');
-const effectLevelElement = uploadOverlay.querySelector('.effect-level');
-const effectLevelValue = effectLevelElement.querySelector('.effect-level__value');
+const uploadOverlayElement = document.querySelector('.img-upload__overlay');
+const imageElement = uploadOverlayElement.querySelector('.img-upload__preview img');
+const effectsElement = uploadOverlayElement.querySelector('.effects');
+const effectLevelElement = uploadOverlayElement.querySelector('.effect-level');
+const effectLevelValueElement = effectLevelElement.querySelector('.effect-level__value');
 const sliderElement = effectLevelElement.querySelector('.effect-level__slider');
 
 let selectedEffect = null;
@@ -15,11 +15,11 @@ const clearFilter = () => {
 
 const setFilter = () => {
   const { FILTER, UNIT } = EffectSetting[selectedEffect];
-  imageElement.style.filter = `${FILTER}(${effectLevelValue.value}${UNIT})`;
+  imageElement.style.filter = `${FILTER}(${effectLevelValueElement.value}${UNIT})`;
 };
 
 const onSliderUpdate = () => {
-  effectLevelValue.value = sliderElement.noUiSlider.get();
+  effectLevelValueElement.value = sliderElement.noUiSlider.get();
   setFilter();
 };
 
