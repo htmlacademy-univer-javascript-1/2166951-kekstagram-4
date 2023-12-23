@@ -1,24 +1,34 @@
 import { isEscapeKey } from './utils.js';
-import { createCommentTemplate } from './templates.js';
 import { COMMENTS_STEP } from './constants.js';
 
 let comments = null;
 let commentsToShow = COMMENTS_STEP;
 
 const bodyElement = document.querySelector('body');
-const fullPicture = bodyElement.querySelector('.big-picture');
-const commentCountElement = fullPicture.querySelector('.social__comment-count');
-const commentsElement = fullPicture.querySelector('.social__comments');
-const commentsLoader = fullPicture.querySelector('.social__comments-loader');
-const exitButton = fullPicture.querySelector('.big-picture__cancel');
+const fullPictureElement = bodyElement.querySelector('.big-picture');
+const commentCountElement = fullPictureElement.querySelector('.social__comment-count');
+const commentsElement = fullPictureElement.querySelector('.social__comments');
+const commentsLoaderElement = fullPictureElement.querySelector('.social__comments-loader');
+const exitButtonElement = fullPictureElement.querySelector('.big-picture__cancel');
+
+const createCommentTemplate = ({ name, avatar, message }) =>`
+  <li class="social__comment">
+    <img
+      class="social__picture"
+      src="${avatar}"
+      alt="${name}"
+      width="35" height="35">
+    <p class="social__text">${message}</p>
+  </li>
+`;
 
 const renderFullPicture = ({ url, likes, description }) => {
-  const picture = fullPicture.querySelector('.big-picture__img img');
+  const picture = fullPictureElement.querySelector('.big-picture__img img');
   picture.src = url;
   picture.alt = description;
 
-  fullPicture.querySelector('.social__caption').textContent = description;
-  fullPicture.querySelector('.likes-count').textContent = likes;
+  fullPictureElement.querySelector('.social__caption').textContent = description;
+  fullPictureElement.querySelector('.likes-count').textContent = likes;
 };
 
 const renderComments = () => {
@@ -31,14 +41,14 @@ const renderComments = () => {
   commentCountElement.textContent = `${visibleComments.length} из ${comments.length} комментариев`;
 
   if (visibleComments.length < comments.length) {
-    commentsLoader.classList.remove('hidden');
+    commentsLoaderElement.classList.remove('hidden');
   } else {
-    commentsLoader.classList.add('hidden');
+    commentsLoaderElement.classList.add('hidden');
   }
 };
 
 
-const onShowMoreComments = () => {
+const onCommentsShowMore = () => {
   commentsToShow += COMMENTS_STEP;
   renderComments();
 };
@@ -58,11 +68,12 @@ function closeFullViewPopup() {
   comments = null;
   commentsToShow = COMMENTS_STEP;
 
-  fullPicture.classList.add('hidden');
+  fullPictureElement.classList.add('hidden');
   commentCountElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
 
-  exitButton.removeEventListener('click', onCloseBtnClick);
+  exitButtonElement.removeEventListener('click', onCloseBtnClick);
+  commentsLoaderElement.removeEventListener('click', onCommentsShowMore);
   document.removeEventListener('keydown', onDocumentEscKeydown);
 }
 
@@ -72,11 +83,11 @@ export const openFullViewPopup = (picture) => {
   renderFullPicture(picture);
   renderComments();
 
-  fullPicture.classList.remove('hidden');
+  fullPictureElement.classList.remove('hidden');
   commentCountElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
 
-  exitButton.addEventListener('click', onCloseBtnClick);
-  commentsLoader.addEventListener('click', onShowMoreComments);
+  exitButtonElement.addEventListener('click', onCloseBtnClick);
+  commentsLoaderElement.addEventListener('click', onCommentsShowMore);
   document.addEventListener('keydown', onDocumentEscKeydown);
 };
